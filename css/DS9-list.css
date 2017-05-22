@@ -1,0 +1,33 @@
+/*
+* Author: James Hickey
+* Assignment: WE4.0 Mobile Web Applications, Digital Skills Academy
+* Date : 2016/05/16
+* Ref: http://demos.jquerymobile.com/1.2.0/
+* Ref: https://themeroller.jquerymobile.com/
+* Ref: http://learning.digitalskillsacademy.com/
+* Ref: http://www.w3schools.com/json/default.asp
+* Ref: https://en.wikipedia.org/wiki
+* Ref: http://api.jquery.com/jquery.getjson/
+* Ref: http://json.org/
+* Ref: https://forum.jquery.com/topic/dynamically-generated-listview
+*/
+
+
+	.station{
+		background-image: url("../images/11.Station.jpg");
+	}
+	.sText{
+		margin: 5%;
+		color: #fff;
+		height: 400px;
+		width: 1000px;
+	}
+	.sImage{
+		height: 500px;
+		width: 900px;
+	}
+	#pText{
+		font-family: "Times New Roman";
+		font-size: 20px;
+		color: red;
+	}

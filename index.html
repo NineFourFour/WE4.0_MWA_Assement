@@ -1,0 +1,94 @@
+<!-- 
+* Author: James Hickey
+* Assignment: WE4.0 Mobile Web Applications, Digital Skills Academy
+* Date : 2016/05/16
+* Ref: http://demos.jquerymobile.com/1.2.0/
+* Ref: https://themeroller.jquerymobile.com/
+* Ref: http://learning.digitalskillsacademy.com/
+* Ref: http://www.w3schools.com/json/default.asp
+* Ref: https://en.wikipedia.org/wiki
+* Ref: http://api.jquery.com/jquery.getjson/
+* Ref: http://json.org/
+* Ref: https://forum.jquery.com/topic/dynamically-generated-listview
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Star Trek DS9</title>		
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
+		<!--Themeroller file, styles the pages-->
+		<link rel="stylesheet" href="themes/DS9.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<!--***************************************************-->
+		<link rel="stylesheet" href="css/DS9-list.css" />
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+	</head>
+	<body>
+	<!--id main links the main page to dymanic created pages--> 
+		<div id="main">
+		<!--id back links the dynamic pages back to the main page-->
+			<div data-role="page" id="back">
+			<!--Collapsible Panel which opens on the left-hand-side of the page-->
+				<div data-role="panel" id="myPanel" > 
+					<!--closes the panel-->
+					<ul data-role="listview">
+						<li data-icon="delete"><a href="#back" data-rel="close">Close</a></li>
+					</ul>
+					<br/>
+					<div class="ui-bar ui-bar-a">
+						<p></p>
+					</div>
+					<h3>List contains characters from Deep Space nine</h3>
+					<h4> Enter one of the following in to the search box</h4>
+					<div class="ui-bar ui-bar-a">
+						<p></p>
+					</div>
+					<div id="pText">
+						Benjamin Sisko<br>Work<br>Odo<br>Kira Nerys<br>Jadzia Dax<br>Quark<br>Elim Garak<br>Martok<br>Morn<br>Vic Fontaine<br>
+					</div>
+					<div class="ui-bar ui-bar-a">
+						<p></p>
+					</div>
+					<!--bottom of the panel-->
+				</div> 
+				<!--Header for the main page includes a buttton to open the panel-->
+				<div data-role="header">
+					<a href="#myPanel" class="ui-btn ui-btn-inline ui-icon-bars ui-corner-all ui-btn-icon-left">Open</a>
+					<h1>Deep Space Nine</h1>
+				</div>
+				<div data-role="content">
+					<div class="content-primary">
+						<div data-demo-html="true" >
+						<!--The list loaded here is generated from the json file, data-filter and data-filter-revel filters the list-->
+							<ul id="ds9Main" data-role = "listview" data-filter="true" data-filter-reveal="true">							
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--bottom of main page-->
+				<div data-role="footer">
+					<h1>DS9</h1>
+				</div>
+			</div>
+		</div>
+	<!--using the following script to generate the list item pages-->
+	<script>
+		(function(){
+		/*method that parses the JSON file*/
+			$.getJSON("ds9List.js").done(function( data ) {
+				//loop through the array in the JSON file, i is a cunter, each object in the array becomes item. 	
+				$.each( data.DS9, function( i, item ){ 
+				//adding items to the list.
+					$("#ds9Main").append('<li><a href="#'+item.id+'" data-transition="slideup">'+item.character+'</a></li>');
+					//generate the list pages 
+					$("#main").append('<div data-role="page" id ="'+item.id+'"><div data-role="header"><h1>'+item.character+'</h1></div><fieldset class="ui-gride-a" style="background-color: white; color:black"><div class="ui-block-a"><img class="sImage" src="'+item.src+'"/></div><div class="ui-block-b station"><div class="sText"><h2>Real name: '+item.character+'</h2><h2>Species: '+item.species+'</h2><h2>Affiliation: '+item.affiliation+'</h2><h2>Position: '+item.position+'</h2><h2>Rank: '+item.rank+'</h2></div></div></fieldset><div data-role="footer"><h2 style="padding-top: 20px">DS9</h2><a href="#back" class="ui-btn-right ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-right data-transition="slide"">Back</a></div></div>');
+				});	 
+				//list generated doesn't work normally, need to refresh it  
+				$('#ds9Main').listview('refresh');
+			});
+		})();		
+	</script>
+	</body>
+</html>
